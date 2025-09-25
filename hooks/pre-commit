@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# preguard pre-commit hook
+# Blocks commits if potential secrets are detected in staged changes.
+
+set -euo pipefail
+
+if ! command -v preguard >/dev/null 2>&1; then
+  echo "Binary not found in PATH. Skipping secrets scan."
+  echo "Tip: install preguard and run 'preguard install' to enable scanning."
+  exit 0
+fi
+
+preguard scan
